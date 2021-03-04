@@ -7,7 +7,7 @@ let str_pos = 0
 let txt = ''
 let lines = ''
 
-let files = fs.readdirSync('.')
+let files = []
 
 let filename = ''
 let extension = ''
@@ -18,9 +18,10 @@ console.log('Initialised!')
 
 fs.writeFileSync('copy.txt', 'ERROR')
 
-CheckFiles()
+CheckFiles('.')
 
-function CheckFiles() {
+function CheckFiles(dir) {
+    files = fs.readdirSync(dir)
     
     for (i = 0; i < files.length; i++) {
         filename = files[i]
@@ -31,6 +32,10 @@ function CheckFiles() {
             console.log('Found a file!')
             test = false
             RemoveComments(filename)
+        }
+
+        if (extension == filename) {
+            GoToDir(filename)
         }
     }
 
@@ -67,7 +72,11 @@ function RemoveComments(file) {
     fs.writeFileSync('copy.txt', lines.join(""));
 }
 
+function GoToDir(dir) {
 
+
+    
+}
 
 
 
