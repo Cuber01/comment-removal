@@ -1,10 +1,11 @@
 //import marked from 'markedjs'
 
-'use strict';
+//'use strict';
 
 let fs = require('fs');
 
 let slash = '/'
+
 
 let str_pos = 0
 let txt = ''
@@ -44,17 +45,21 @@ function GetFolders(dir) {
         }
     }
 
+    folders_i += 1
+
     if (folders_i != folders.length) {
-        folders_i += 1
-       // console.log(folders[folders_i], folders_i)
+        //console.log(folders[folders_i], folders_i)
+        GetFiles(folders[folders_i], 'c')
         GetFolders(folders[folders_i])
     }
+
+    //console.log(folders_i)
+    //GetFiles(folders[folders_i], 'c')
 
 }
 
 
 function GetFiles(dir, ext) {
-
  
     files = fs.readdirSync(dir)
     //console.log(files.length)
@@ -70,20 +75,13 @@ function GetFiles(dir, ext) {
             RemoveComments(filename, dir)
         }
 
-
-
-        if (extension == filename) {
-            GoToDir(filename)
-            console.log('Folder found:', filename)
-        }
-
     }
 
 }
 
 function RemoveComments(file, dir) {
 
-    let path_to_file = dir.concat(file)
+    let path_to_file = dir + slash + filename
 
     txt = fs.readFileSync(path_to_file, 'utf8')
 
@@ -113,7 +111,7 @@ function RemoveComments(file, dir) {
         lines[i] = lines[i].concat('\n');
     }
 
-    fs.writeFileSync(dir + 'copy.txt', lines.join(""));
+    fs.writeFileSync(dir + slash + 'copy.txt', lines.join(""));
     //console.log(current_dir.concat('copy.txt'))
 
     console.log('Comments removed:', filename)
@@ -136,7 +134,7 @@ function IsDirectory(dir) {
     let stats = fs.statSync(dir);
 
     if (stats.isDirectory()) {
-        console.log(dir)
+        //console.log(dir)
         return(true)
     }
 
