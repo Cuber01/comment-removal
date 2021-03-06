@@ -1,7 +1,10 @@
 //import marked from 'markedjs'
 
+'use strict';
 
 let fs = require('fs');
+
+let slash = '/'
 
 let str_pos = 0
 let txt = ''
@@ -9,47 +12,89 @@ let lines = ''
 
 let files = []
 
+
 let filename = ''
 let extension = ''
-let test = true
+
+let current_dir = '/home/cubeq/Other/NuclearDirectory'
+let folders_i = -1
+let folders = []
+
 
 console.log('Initialised!')
 
 
-fs.writeFileSync('copy.txt', 'ERROR')
 
-CheckFiles('.')
+GetFolders(current_dir)
 
-function CheckFiles(dir) {
+
+function GetFolders(dir) {
+    //console.log(dir)
+
     files = fs.readdirSync(dir)
-    
-    for (i = 0; i < files.length; i++) {
+
+
+    for (let i = 0; i < files.length; i++) {
         filename = files[i]
         extension = filename.split('.').pop()
-        console.log(filename, extension)
+        //console.log(filename, extension)
 
-        if (extension == 'c' && test == true) {
-            console.log('Found a file!')
-            test = false
-            RemoveComments(filename)
+        if (IsDirectory(dir + slash + filename)) {
+            folders.push(dir + slash + filename)
         }
+    }
 
-        if (extension == filename) {
-            GoToDir(filename)
-        }
+    if (folders_i != folders.length) {
+        folders_i += 1
+       // console.log(folders[folders_i], folders_i)
+        GetFolders(folders[folders_i])
     }
 
 }
 
-function RemoveComments(file) {
 
-    txt = fs.readFileSync(file, 'utf8')
+function GetFiles(dir, ext) {
+
+ 
+    files = fs.readdirSync(dir)
+    //console.log(files.length)
+
+    for (let i = 0; i < files.length; i++) {
+        filename = files[i]
+        extension = filename.split('.').pop()
+        //console.log(filename, extension)
+
+
+        if (extension == ext) {
+            //console.log('File found:', filename)
+            RemoveComments(filename, dir)
+        }
+
+
+
+        if (extension == filename) {
+            GoToDir(filename)
+            console.log('Folder found:', filename)
+        }
+
+    }
+
+}
+
+function RemoveComments(file, dir) {
+
+    let path_to_file = dir.concat(file)
+
+    txt = fs.readFileSync(path_to_file, 'utf8')
+
     lines = txt.split("\n")
 
-    for (i = 0; i < lines.length; i++) {
-        console.log(i)
+    //console.log(path_to_file)
 
-        for (j = 0; j < lines[i].length; j++) {
+
+    for (let i = 0; i < lines.length; i++) {
+
+        for (let j = 0; j < lines[i].length; j++) {
 
             str_pos = lines[i].search("//ET");
 
@@ -58,27 +103,44 @@ function RemoveComments(file) {
             }
 
         }
-    
-   
+
+
 
     }
-
 
 
     for (i = 0; i < lines.length; i++) {
         lines[i] = lines[i].concat('\n');
     }
 
-    fs.writeFileSync('copy.txt', lines.join(""));
+    fs.writeFileSync(dir + 'copy.txt', lines.join(""));
+    //console.log(current_dir.concat('copy.txt'))
+
+    console.log('Comments removed:', filename)
 }
+
+
 
 function GoToDir(dir) {
 
+    current_dir = current_dir + dir + slash
 
-    
+
+    console.log(current_dir)
+    GetFiles(current_dir, 'c')
 }
 
 
+function IsDirectory(dir) {
 
+    let stats = fs.statSync(dir);
 
+    if (stats.isDirectory()) {
+        console.log(dir)
+        return(true)
+    }
+
+    return(false)
+
+}
 
