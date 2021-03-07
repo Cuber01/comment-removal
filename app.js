@@ -77,9 +77,10 @@ function ReadConfig() {
         console.log('Directory input corrected')
     }
 
+    
+    folders.push(current_dir)
     console.log('Directory: ' + current_dir)
-
-
+    
 }
 
 function GetFolders(dir) {
