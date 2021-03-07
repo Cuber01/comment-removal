@@ -11,6 +11,6 @@
 	"comment_extension": "Comments will be removed only from files with this file extension. Enter it without a dot.",
 	"File extension": "c",
 
-	"comment_path": "Enter a full path to the folder with your files. All comments from files in this folder, and all subfolders will be removed. Do not enter a slash/backslash at the end.", 		
+	"comment_path": "Enter a full path to the folder with your files. All comments from files in this folder, and all subfolders will be removed. Do not enter a slash/backslash at the end. Can be overwritten by a commandline argument.", 		
 	"Path": "/home/cubeq/Other/NuclearDirectory"
 }
