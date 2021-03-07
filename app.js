@@ -112,16 +112,14 @@ function GetFolders(dir) {
 function GetFiles(dir, ext) {
  
     files = fs.readdirSync(dir)
-    //console.log(files.length)
+    console.log(dir, files.length)
 
     for (let i = 0; i < files.length; i++) {
         filename = files[i]
         extension = filename.split('.').pop()
-        //console.log(filename, extension)
 
 
         if (extension == ext) {
-            //console.log('File found:', filename)
             RemoveComments(filename, dir)
         }
 
@@ -131,11 +129,13 @@ function GetFiles(dir, ext) {
 
 function RemoveComments(file, dir) {
 
-    let path_to_file = dir + slash + filename
+    let path_to_file = dir + slash + file
 
     txt = fs.readFileSync(path_to_file, 'utf8')
 
     lines = txt.split("\n")
+
+    fs.writeFileSync(dir + slash + 'back_' + file + '.txt', lines.join("\n"));
 
     for (let i = 0; i < lines.length; i++) {
 
@@ -158,29 +158,17 @@ function RemoveComments(file, dir) {
         lines[i] = lines[i].concat('\n');
     }
 
-    fs.writeFileSync(dir + slash + 'copy.txt', lines.join(""));
+    fs.writeFileSync(dir + slash + file, lines.join(""));
     //console.log(current_dir.concat('copy.txt'))
 
-    console.log('\nComments removed:', filename)
+    console.log('Comments removed:', file)
 }
-
-
-function GoToDir(dir) {
-
-    current_dir = current_dir + dir + slash
-
-
-    console.log(current_dir)
-    GetFiles(current_dir, 'c')
-}
-
 
 function IsDirectory(dir) {
 
     let stats = fs.statSync(dir);
 
     if (stats.isDirectory()) {
-        //console.log(dir)
         return(true)
     }
 
