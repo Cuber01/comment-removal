@@ -1,5 +1,9 @@
 
 
+console.log("Comment-removal by @Cuber01 v1.0 2021")
+console.log("==============================================")
+
+
 let fs = require('fs');
 
 
@@ -64,17 +68,23 @@ function ReadConfig() {
 
     console.log('File extension: ' + extension)
 
-    current_dir = table_config["Path"]
+    if( process.argv.length  > 2  ) { 
+        current_dir = process.argv[2]
+    } else {
+       current_dir = table_config["Path"]
+    }
 
     if (current_dir == undefined || current_dir == "EDIT_THIS") {
         console.log(error_dir)
         process.exit(1)
     }
     
-    //  FIXME
+    
     if (current_dir[current_dir.length-1] == "/" || current_dir[current_dir.length-1] == "\\") {
-        current_dir[current_dir.length-1] = ""
+
+        current_dir = current_dir.substring(0, current_dir.length-1)
         console.log('Directory input corrected')
+
     }
 
 
@@ -84,7 +94,6 @@ function ReadConfig() {
 }
 
 function GetFolders(dir) {
-    //console.log(dir)
 
     files = fs.readdirSync(dir)
 
@@ -92,7 +101,6 @@ function GetFolders(dir) {
     for (let i = 0; i < files.length; i++) {
         filename = files[i]
         extension = filename.split('.').pop()
-        //console.log(filename, extension)
 
         if (IsDirectory(dir + slash + filename)) {
             folders.push(dir + slash + filename)
@@ -102,7 +110,6 @@ function GetFolders(dir) {
     folders_i += 1
 
     if (folders_i != folders.length) {
-        //console.log(folders[folders_i], folders_i)
         GetFiles(folders[folders_i], 'c')
         GetFolders(folders[folders_i])
     }
@@ -115,7 +122,6 @@ function GetFiles(dir, ext) {
     files = fs.readdirSync(dir)
 
     for (let i = 0; i < files.length; i++) {
-        //console.log(i, files.length)
         filename = files[i]
         extension = filename.split('.').pop()
 
@@ -129,7 +135,6 @@ function GetFiles(dir, ext) {
 }
 
 function RemoveComments(file, dir) {
-    //console.log(file)
     let path_to_file = dir + slash + file
 
     txt = fs.readFileSync(path_to_file, 'utf8')
@@ -160,7 +165,6 @@ function RemoveComments(file, dir) {
     }
 
     fs.writeFileSync(dir + slash + file, lines.join(""));
-    //console.log(current_dir.concat('copy.txt'))
 
     console.log('Comments removed:', file)
 }

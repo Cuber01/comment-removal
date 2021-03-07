@@ -1,5 +1,5 @@
 {
-	"comment": "In order to run the program, you have to provide some information first. Please enter some info, and run app.js with node.js",
+	"comment": "In order to run the program, you have to provide some information first. Please enter some info, and run comment-removal.js with node.js",
 	"comment2": "Edit only EDIT_THIS strings.",
 	
 	"comment_slash": "Enter a slash (/) or a backslash (\\), depending on which one your system uses in paths to directories. If you want to enter a backslash, please enter 2x \\ or it will result in an error.",
@@ -11,5 +11,6 @@
 	"comment_extension": "Comments will be removed only from files with this file extension. Enter it without a dot.",
 	"File extension": "c",
 
-	"comment_path": "Enter a full path to the folder with your files. All comments from files in this folder, and all subfolders will be removed. Do not enter a slash/backslash at the end.", 		"Path": "/home/cubeq/Other/NuclearDirectory"
+	"comment_path": "Enter a full path to the folder with your files. All comments from files in this folder, and all subfolders will be removed. Do not enter a slash/backslash at the end.", 		
+	"Path": "/home/cubeq/Other/NuclearDirectory"
 }
