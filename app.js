@@ -71,13 +71,13 @@ function ReadConfig() {
         process.exit(1)
     }
     
-    //  FIX THIS
+    //  FIXME
     if (current_dir[current_dir.length-1] == "/" || current_dir[current_dir.length-1] == "\\") {
         current_dir[current_dir.length-1] = ""
         console.log('Directory input corrected')
     }
 
-    
+
     folders.push(current_dir)
     console.log('Directory: ' + current_dir)
     
