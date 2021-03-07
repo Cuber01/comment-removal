@@ -112,9 +112,9 @@ function GetFolders(dir) {
 function GetFiles(dir, ext) {
  
     files = fs.readdirSync(dir)
-    console.log(dir, files.length)
 
     for (let i = 0; i < files.length; i++) {
+        //console.log(i, files.length)
         filename = files[i]
         extension = filename.split('.').pop()
 
@@ -128,7 +128,7 @@ function GetFiles(dir, ext) {
 }
 
 function RemoveComments(file, dir) {
-
+    //console.log(file)
     let path_to_file = dir + slash + file
 
     txt = fs.readFileSync(path_to_file, 'utf8')
