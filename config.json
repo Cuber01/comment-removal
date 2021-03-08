@@ -3,14 +3,14 @@
 	"comment2": "Edit only EDIT_THIS strings.",
 	
 	"comment_slash": "Enter a slash (/) or a backslash (\\), depending on which one your system uses in paths to directories. If you want to enter a backslash, please enter 2x \\ or it will result in an error.",
-	"Slash or backslash": "/",
+	"Slash or backslash": "EDIT_THIS",
 
 	"comment_comment_sequence": "Enter the comment sequence you use to comment stuff in your language. Everything in the line after this sequence of characters will be removed",
-	"Comment sequence": "##",
+	"Comment sequence": "EDIT_THIS",
 
 	"comment_extension": "Comments will be removed only from files with this file extension. Enter it without a dot.",
-	"File extension": "c",
+	"File extension": "EDIT_THIS",
 
 	"comment_path": "Enter a full path to the folder with your files. All comments from files in this folder, and all subfolders will be removed. Do not enter a slash/backslash at the end. Can be overwritten by a commandline argument.", 		
-	"Path": "/home/cubeq/Other/NuclearDirectory"
+	"Path": "EDIT_THIS"
 }
